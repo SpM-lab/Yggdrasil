@@ -1,14 +1,14 @@
 using BinaryBuilder, Pkg
 
 name = "libsparseir"
-version = v"0.8.0"
+version = v"0.9.0"
 
 # Collection of sources required to complete build
 sources = [
-    # sparse-ir-rs v0.8.0
+    # sparse-ir-rs v0.9.0
     GitSource(
         "https://github.com/SpM-lab/sparse-ir-rs.git",
-        "993365de9ec4cfb8fe187cf719e28d3f6eb9d59d",
+        "0b9cff54cba4c968b3644d3e28ec47c892a1a2a8",
     ),
 ]
 
@@ -19,11 +19,13 @@ install_license LICENSE
 
 if [[ "${target}" == *mingw* ]]; then
     export RUSTFLAGS="-C link-arg=-L${libdir} -C link-arg=-lblastrampoline-5"
+    export CARGO_PROFILE_RELEASE_DEBUG=line-tables-only
     cargo build --release --features system-blas
     install -D -m 755 "target/${rust_target}/release/sparse_ir_capi.${dlext}" \
         "${libdir}/libsparse_ir_capi.${dlext}"
 else
     export RUSTFLAGS="-C link-arg=-lblastrampoline"
+    export CARGO_PROFILE_RELEASE_DEBUG=line-tables-only
     cargo build --release --features system-blas
     install -D -m 755 "target/${rust_target}/release/libsparse_ir_capi.${dlext}" \
         "${libdir}/libsparse_ir_capi.${dlext}"
