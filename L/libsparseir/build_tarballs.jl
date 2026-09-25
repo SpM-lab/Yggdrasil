@@ -4,14 +4,14 @@ const YGGDRASIL_DIR = "../.."
 include(joinpath(YGGDRASIL_DIR, "platforms", "macos_sdks.jl"))
 
 name = "libsparseir"
-version = v"0.8.4"
+version = v"0.9.1"
 
 # Collection of sources required to complete build
 sources = [
-    # sparse-ir-rs v0.8.4
+    # sparse-ir-rs v0.9.1
     GitSource(
         "https://github.com/SpM-lab/sparse-ir-rs.git",
-        "910331f4a7284f47fe5cf5d5d82565ebb4cfdbce",
+        "bb71e1b19e166c654dd7993946e6f8ab39b77e9c",
     ),
 ]
 
